@@ -1,0 +1,263 @@
+/* ==========================================
+   XV EXPERIENCE — PERSONALIZACIÓN DE INVITADOS
+   TEMA "XV ROYAL"
+   Complemento de style.css (mismas variables).
+========================================== */
+
+/* Respetar el atributo [hidden] */
+.rsvp-guest-badge[hidden], .rsvp-guest-note[hidden], .rsvp-companions[hidden] { display: none !important; }
+
+
+/* ==========================================
+   TARJETA DE INVITADO (la crea invitados.js)
+   Ventana en arco, debajo del sobre
+========================================== */
+
+.guest-personalization {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  width: min(100%, 320px); margin: 26px auto 0; padding: 32px 22px 20px;
+  text-align: center; border: 1px solid var(--gold-soft); outline: 1px solid var(--hair); outline-offset: -8px;
+  border-radius: 999px 999px 26px 26px; background: rgba(var(--paper), 0.96);
+  box-shadow: 0 20px 40px rgba(60, 20, 40, 0.22);
+  animation: guestCardIn 0.9s ease 0.25s both;
+}
+
+.guest-personalization::before { content: "✦"; color: var(--gold); font-size: 0.9rem; line-height: 1; margin-bottom: 2px; }
+
+.guest-personalization-label { color: var(--gold-dark); font-family: var(--font-title); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; }
+
+.guest-personalization-name { color: var(--ink); font-family: var(--font-script); font-size: clamp(2.1rem, 9vw, 2.7rem); font-weight: 400; line-height: 1.1; text-wrap: balance; overflow-wrap: anywhere; }
+
+.guest-personalization-name::after { content: ""; display: block; width: 60px; height: 1px; margin: 8px auto 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+
+/* Texto adicional (y Familia, y esposa e hija, etc.) */
+.guest-personalization-extra { margin-top: 4px; color: var(--text); font-family: var(--font-body); font-size: 1rem; font-style: italic; line-height: 1.35; }
+
+/* "Invitación para N personas" */
+.guest-personalization-people {
+  display: inline-block; margin-top: 10px; padding: 8px 20px; border: 1px solid var(--gold); border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 55%, var(--accent))); color: #fff;
+  font-family: var(--font-title); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+@keyframes guestCardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ==========================================
+   RSVP: NOTA, INSIGNIA, CAMPOS BLOQUEADOS
+========================================== */
+
+.rsvp > p.rsvp-guest-note:not(.section-eyebrow):not(.rsvp-message) {
+  display: block; width: fit-content; max-width: 100%; margin: -10px auto 30px; padding: 8px 26px;
+  border: 1px solid var(--gold); border-radius: 999px; background: rgba(var(--paper), 0.92);
+  color: var(--ink); font-family: var(--font-script); font-size: 1.7rem; font-style: normal; line-height: 1.3;
+}
+
+.rsvp-guest-badge {
+  width: fit-content; max-width: 100%; margin: -6px auto 18px; padding: 6px 18px;
+  border: 1px solid var(--gold); border-radius: 999px; background: var(--rose);
+  color: var(--ink); font-family: var(--font-title); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; text-align: center;
+}
+
+.rsvp-field input[readonly] { border-style: dashed; background: var(--rose); color: var(--ink); font-weight: 500; cursor: default; }
+.rsvp-field input[readonly]:focus { border-color: var(--gold-soft); box-shadow: none; }
+
+
+/* ==========================================
+   RSVP: SELECTOR DE ACOMPAÑANTES
+========================================== */
+
+.rsvp-companions { padding: 14px 14px 12px; border: 1px solid var(--gold-soft); border-radius: 20px; background: var(--rose); text-align: center; }
+.rsvp-companions > label { margin-bottom: 10px; }
+
+.rsvp-stepper { display: flex; align-items: center; justify-content: center; gap: 18px; }
+
+.rsvp-stepper-btn {
+  width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; padding: 0 0 3px;
+  border: 1px solid var(--gold); border-radius: 50%; background: rgb(var(--paper)); color: var(--ink);
+  font-family: var(--font-title); font-size: 1.5rem; line-height: 1; box-shadow: 0 6px 14px rgba(60, 20, 40, 0.14);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+.rsvp-stepper-btn:hover:not(:disabled) { background: var(--gold); color: #fff; transform: translateY(-2px); }
+.rsvp-stepper-btn:active:not(:disabled) { transform: scale(0.94); }
+.rsvp-stepper-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.rsvp-stepper-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.rsvp-stepper-value { min-width: 3.2rem; color: var(--ink); font-family: var(--font-title); font-size: 2.2rem; font-weight: 600; line-height: 1; text-align: center; }
+.rsvp-companions-hint { display: block; margin-top: 10px; color: var(--text); font-size: 0.82rem; font-style: italic; line-height: 1.6; opacity: 0.8; }
+
+
+/* ==========================================
+   APERTURA: FONDO OPCIONAL CON IMAGEN
+   (config.js → apertura.fondo)
+========================================== */
+
+.intro-bg { position: absolute; inset: -24px; background-size: cover; background-repeat: no-repeat; opacity: 0; transition: opacity 1.2s ease; pointer-events: none; }
+
+.intro.intro--con-fondo .intro-overlay {
+  background: linear-gradient(180deg,
+    rgb(10 20 35 / calc(var(--intro-scrim, 0.25) * 1.3)) 0%,
+    rgb(10 20 35 / calc(var(--intro-scrim, 0.25) * 0.55)) 45%,
+    rgb(10 20 35 / calc(var(--intro-scrim, 0.25) * 1.5)) 100%);
+}
+
+/* Con foto de fondo, los textos pasan a blanco */
+.intro.intro--con-fondo .intro-small,
+.intro.intro--con-fondo h1,
+.intro.intro--con-fondo .intro-name,
+.intro.intro--con-fondo .seal-label { color: #fff; text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.35); }
+
+.intro.intro--con-fondo::before { border-color: rgba(255, 255, 255, 0.75); box-shadow: inset 0 0 0 8px transparent, inset 0 0 0 9px rgba(255, 255, 255, 0.4); }
+
+
+/* ==========================================
+   BOTÓN: SELLO / SOBRE
+========================================== */
+
+.btn-seal {
+  --seal-color: var(--primary, #be34c1);
+  --seal-light: color-mix(in srgb, var(--seal-color) 72%, #fff);
+  --seal-dark:  color-mix(in srgb, var(--seal-color) 62%, #000);
+  --seal-deep:  color-mix(in srgb, var(--seal-color) 38%, #000);
+  --seal-gold:  var(--accent, #d6b45f);
+
+  position: relative; display: inline-flex; flex-direction: column; align-items: center;
+  padding: 0; border: none; background: none; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.btn-seal:focus-visible { outline: 2px solid var(--seal-gold); outline-offset: 10px; border-radius: 24px; }
+
+.seal-stage { position: relative; display: block; width: clamp(132px, 38vw, 176px); aspect-ratio: 200 / 250; transition: transform 0.35s ease; }
+
+.seal-svg {
+  position: relative; z-index: 2; display: block; width: 100%; height: 100%; overflow: visible;
+  filter: drop-shadow(0 12px 14px rgba(60, 20, 40, 0.32)) drop-shadow(0 2px 3px rgba(60, 20, 40, 0.22));
+}
+
+.btn-seal:hover .seal-stage { transform: translateY(-4px) scale(1.05); }
+.btn-seal:active .seal-stage { transform: scale(0.96); }
+
+/* Emblema: moño o inicial */
+.seal-emblem--initial { display: none; }
+.btn-seal[data-emblema="inicial"] .seal-emblem--initial { display: inline; }
+.btn-seal[data-emblema="inicial"] .seal-emblem--bow { display: none; }
+.btn-seal.sin-listones .seal-ribbon { display: none; }
+
+/* Etiqueta "ABRIR INVITACIÓN": arriba del sobre, con filetes dorados */
+.seal-label {
+  position: relative; order: -1; display: inline-flex; align-items: center; gap: 12px;
+  margin: 0 0 14px; color: var(--ink);
+  font-family: var(--font-title); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase;
+  animation: sealHint 2.6s ease-in-out infinite;
+}
+.seal-label::before, .seal-label::after { content: ""; width: 24px; height: 1px; background: linear-gradient(90deg, transparent, var(--seal-gold)); }
+.seal-label::after { transform: scaleX(-1); }
+
+
+/* ==========================================
+   ANIMACIONES DEL SELLO
+========================================== */
+
+.seal-body { transform-box: view-box; transform-origin: 100px 100px; animation: sealBeat 2.8s ease-in-out infinite; }
+@keyframes sealBeat {
+  0%, 55%, 100% { transform: scale(1); }
+  12% { transform: scale(1.06); } 24% { transform: scale(1); }
+  36% { transform: scale(1.04); } 48% { transform: scale(1); }
+}
+
+.seal-shine { animation: sealShine 3.6s ease-in-out infinite; }
+@keyframes sealShine {
+  0% { transform: translateX(-70px) skewX(-20deg); }
+  45%, 100% { transform: translateX(260px) skewX(-20deg); }
+}
+
+.seal-ribbon { transform-box: view-box; transform-origin: 100px 112px; }
+.seal-ribbon--left  { animation: ribbonLeft 3.2s ease-in-out infinite alternate; }
+.seal-ribbon--right { animation: ribbonRight 3.2s ease-in-out infinite alternate; }
+@keyframes ribbonLeft  { from { transform: rotate(-3.5deg); } to { transform: rotate(2.5deg); } }
+@keyframes ribbonRight { from { transform: rotate(3.5deg); } to { transform: rotate(-2.5deg); } }
+
+.seal-ripple {
+  position: absolute; top: 40%; left: 50%; z-index: 1; width: 78%; aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--seal-gold) 80%, transparent); border-radius: 50%;
+  opacity: 0; transform: translate(-50%, -50%) scale(0.8); animation: sealRipple 2.8s ease-out infinite; pointer-events: none;
+}
+.seal-ripple--2 { animation-delay: 1.4s; }
+@keyframes sealRipple {
+  0%   { opacity: 0.75; transform: translate(-50%, -50%) scale(0.85); }
+  100% { opacity: 0;    transform: translate(-50%, -50%) scale(1.85); }
+}
+
+.seal-sparkle { position: absolute; z-index: 3; color: var(--seal-gold); font-size: 0.95rem; line-height: 1; opacity: 0; animation: sealSparkle 3s ease-in-out infinite; pointer-events: none; }
+.seal-sparkle--1 { top: 8%;  left: 4%;  animation-delay: 0s; }
+.seal-sparkle--2 { top: 20%; right: 2%; animation-delay: 1s; font-size: 0.75rem; }
+.seal-sparkle--3 { top: 52%; left: 0;   animation-delay: 2s; font-size: 0.7rem; }
+@keyframes sealSparkle {
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  40%, 60% { opacity: 1; transform: scale(1.15) rotate(45deg); }
+}
+
+@keyframes sealHint { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+/* Al hacer clic: el sello se rompe y se va */
+.btn-seal.is-opening { pointer-events: none; }
+.btn-seal.is-opening .seal-stage { animation: sealOpen 0.75s cubic-bezier(0.3, 0.7, 0.2, 1) forwards; }
+.btn-seal.is-opening .seal-label { animation: none; opacity: 0; transition: opacity 0.3s ease; }
+@keyframes sealOpen {
+  0%   { opacity: 1; transform: scale(1); }
+  30%  { opacity: 1; transform: scale(0.9); }
+  100% { opacity: 0; transform: scale(1.4); }
+}
+
+
+/* ==========================================
+   CARGA DE LA APERTURA
+   (la apertura se oculta hasta que app.js termina)
+========================================== */
+
+.intro.intro--cargando { opacity: 0; visibility: hidden; transition: none; animation: introRescate 0.5s ease 6s forwards; }
+@keyframes introRescate { to { opacity: 1; visibility: visible; } }
+
+.intro.intro--lista { transition: none; animation: introReveal 0.6s ease backwards; }
+@keyframes introReveal { from { opacity: 0; } }
+
+.page-loader {
+  position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; animation: loaderIn 0.4s ease 0.35s forwards, loaderRescate 0.3s ease 6s forwards;
+}
+.page-loader span { color: #d6b45f; font-size: 1.6rem; animation: loaderPulse 1.4s ease-in-out infinite; }
+@keyframes loaderIn { to { opacity: 1; } }
+@keyframes loaderRescate { to { opacity: 0; } }
+@keyframes loaderPulse {
+  0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.6; }
+  50%      { transform: scale(1.15) rotate(45deg); opacity: 1; }
+}
+
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 700px) {
+  .guest-personalization { padding: 28px 18px 18px; }
+  .rsvp > p.rsvp-guest-note:not(.section-eyebrow):not(.rsvp-message) { font-size: 1.5rem; padding: 6px 20px; }
+}
+
+@media (max-height: 720px) {
+  .seal-stage { width: 118px; }
+  .intro-name { margin-bottom: 22px; }
+  .guest-personalization { margin-top: 14px; padding: 24px 16px 14px; }
+  .seal-label { margin-bottom: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guest-personalization { animation: none; }
+  .rsvp-stepper-btn { transition: none; }
+  .seal-body, .seal-shine, .seal-ribbon, .seal-ripple, .seal-sparkle, .seal-label { animation: none; }
+  .seal-ripple, .seal-sparkle { display: none; }
+  .seal-stage { transition: none; }
+  .intro.intro--lista, .page-loader span { animation: none; }
+}
